@@ -1,0 +1,137 @@
+\documentclass[10pt,a4paper]{protocol}
+\usepackage{amssymb,amsmath,amsfonts,eurosym,ulem,graphicx,caption,color,setspace,sectsty,comment,footmisc,caption,pdflscape,subfigure,array}
+
+% Change the page layout if you need to
+\geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1cm,bottom=1cm}
+
+% Change the font if you want to.
+
+% If using pdflatex:
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}
+
+% If using xelatex or lualatex:
+% \setmainfont{Lato}
+
+% Change the colours if you want to
+\definecolor{Bright}{HTML}{58318f}
+\definecolor{Green}{HTML}{319866}
+\definecolor{Black}{HTML}{111111}
+\definecolor{LightGrey}{HTML}{515c50}
+
+\definecolor{main}{HTML}{00274C}
+\definecolor{background}{HTML}{EFF0F1}
+
+\definecolor{alert}{HTML}{CC6600}
+\definecolor{example}{HTML}{00274C}
+
+\colorlet{heading}{main}
+\colorlet{accent}{alert}
+\colorlet{emphasis}{main}
+\colorlet{body}{main}
+
+
+% Change the bullets for itemize and rating marker
+% for \risk if you want to
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faSpinner}
+
+%% sample.bib contains your publications
+\addbibresource{sample.bib}
+
+\begin{document}
+\name{Difference-in-Differences}
+\tagline{Twice as good as a single difference}
+\made{August 7, 2020}
+\logo{6.5cm}{"rosslogo"}
+
+
+
+\docinfo{%
+  % can add more \addedtopeople
+  \madeby{Sarah Miller}{mille@umich.edu}{for BE 887}
+%  \addedto{John Smith}{abv1@uni.ac.uk}{October 3, 2017}
+}
+
+
+%\purpose{
+%Difference-in-differences compares the change in an outcome in treated units before and after receiving the treatment to the change in the outcome in untreated units over the same time period. 
+%} % add a short discription of the purpose for this protocol
+
+
+%% Make the header extend all the way to the right, if you want.
+\begin{fullwidth}
+\makeheader
+\end{fullwidth}
+
+%% Provide the file name containing the sidebar contents as an optional parameter to \need.
+%% You can always just use \marginpar{...} if you do
+%% not need to align the top of the contents to any
+%% \need title in the "main" bar.
+Difference-in-differences compares the change in an outcome in treated units before and after receiving the treatment to the change in the outcome in untreated units over the same time period.
+
+
+\need[materials]{When to use}
+\req{1}{Some units are treated and some are not}{}
+\begin{itemize}
+	\item E.g., some states enact a policy and others do not, some workers receive a training and others do not, etc.
+	\item You observe data before and after treatment for types of units.
+	\item ``Spillovers'' or ``externalities'' are negligible (i.e. untreated units not affected by treatment).
+\end{itemize}
+\divider
+
+\req{2}{Treated units may vary in terms of levels but are on the same trends prior to the policy}{}
+\begin{itemize}
+	\item It is reasonable to expect that after accounting for level differences, the untreated units capture how the treated units' outcome would have evolved in the absence of treatment.
+\end{itemize}
+\divider
+
+\need[]{What to Do: The Basics}
+
+\step{1}{Plot data of treated and untreated units against time}{40}
+\begin{itemize}
+	\item Ideally all treated units are treated at the same time.
+	\item Do you observe a trend break in the raw data?
+	\item Do treated and untreated units appear to be on a similar trend before the treatment, but diverge after the treatment?
+\end{itemize}
+\divider
+
+\step{2}{``Event Study'' Version}{25}
+\begin{itemize}
+	\item If treatment time is $t^*$, estimate a model of the form $y_{it}=\beta_i + \beta_t + Treated_{i} \times \sum_{\substack{t}} \beta_z  I\mathbbm(t-t^*=z)  + \epsilon_{it}$.
+	\item Ideally, you will see that coefficients on indicators prior to the treatment ($\beta_z$ for $z<0$) are small and not statistically significant.
+	\item If coefficients on post-treatment indicators ($\beta_z$ for $z\geq0$) are statistically significant, that indicates the treatment had an effect.
+\end{itemize}
+\divider
+
+\step{3}{``Diff in Diff'' Version}{30}
+\begin{itemize}
+	\item Regress a model of the form $y_{it}=\beta_i + \beta_t + \beta_{DD} \mathit{Treated}_{i} \times \mathit{After}_t + \epsilon_{it}$.
+	\item $Treated_i=1$ if unit is treated; $After_t=1$ if time is after treatment.
+	\item The difference-in-differences effect is $\beta_{DD}$.
+\end{itemize}
+\divider
+
+
+\clearpage
+
+\need[otherinfo]{Sources}
+
+\nocite{*}
+
+\printbibliography
+
+
+\divider
+
+
+%% If the NEXT page doesn't start with a \need but you'd
+%% still like to add a sidebar, then use this command on THIS
+%% page to add it. The optional argument lets you pull up the
+%% sidebar a bit so that it looks aligned with the top of the
+%% main column.
+% \addnextpagesidebar[-1ex]{page3sidebar}
+
+
+\end{document}

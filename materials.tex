@@ -1,0 +1,43 @@
+\need{Inference}
+
+\begin{itemize}
+    \item Cluster at the level of treatment to account for within-unit correlation of the error term over time (\cite{bertrand}).
+    \item Do you have a small \# of clusters? Use a clustered wild bootstrap or permutation test (\cite{Cameron}, \cite{hagemann}).
+\end{itemize}
+
+%\divider\smallskip
+
+%\itemtag{other}
+%\itemtag{more}
+%\itemtag{used before (would do)}
+%\itemtag{twesors}
+
+
+\need{Pitfalls}
+\begin{itemize}
+\item Do treated and untreated units appear to be on different pre-treatment trends? You have options!
+\begin{itemize}
+    \item Re-weight untreated units using synthetic control (\cite{Abadie}) or inverse propensity score weighting (\cite{Hirano}).
+    \item Use your knowledge of the setting to select only untreated units you think will be on a similar trend (e.g. states in the same region, rather than all states).
+\end{itemize} 
+    \item Are units treated at different times? This can cause problems. See \cite{abraham_estimating_2018} and \cite{goodman-bacon_difference--differences_2018}.
+    \item Do you have adequate power to detect ``pre-trends'' if they are present? Check with method in \cite{roth_pre-test_2019}, Section 5.2.
+    \end{itemize}
+
+
+
+\need{Rating}
+
+\risk{Difficulty}{2}
+\risk{Fun}{5}
+\risk{Validity}{3}
+
+
+\need{Make it Sizzle}
+\begin{itemize}
+    \item Can you identify a subgroup within the treated units that was not affected by treatment? This could serve as a placebo test, and may even allow you to estimate the elusive ``triple difference'' model!
+\end{itemize}
+
+
+
+
